@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #00cc33;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}
+
+/* ── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: #00ff41;
+  color: #0a0a0a;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Grid background ────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Scanline overlay ───────────────────────────────────────── */
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 255, 65, 0.015) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Typewriter cursor ──────────────────────────────────────── */
+.typewriter-cursor::after {
+  content: '█';
+  color: #00ff41;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Glow text ──────────────────────────────────────────────── */
+.glow-green {
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.6), 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+/* ── Terminal card border glow on hover ─────────────────────── */
+.terminal-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.terminal-card:hover {
+  box-shadow: 0 0 0 1px #00ff41, 0 0 20px rgba(0, 255, 65, 0.15), 0 8px 32px rgba(0, 0, 0, 0.6);
+  transform: translateY(-4px);
+  border-color: #00ff41 !important;
+}
+
+/* ── Fade-up animation class (toggled via JS) ───────────────── */
+.fade-up-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.fade-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* ── Blinking cursor blip decorations ───────────────────────── */
+.cursor-blip {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: #00ff41;
+  animation: blink 1s step-end infinite;
+  opacity: 0.4;
+}
+
+/* ── Process line animation ─────────────────────────────────── */
+.process-line {
+  width: 0%;
+  transition: width 1.2s ease-out;
+}
+.process-line.animated {
+  width: 100%;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 4px #00ff41, 0 0 8px rgba(0,255,65,0.25); }
+  50% { box-shadow: 0 0 12px #00ff41, 0 0 24px rgba(0,255,65,0.4); }
+}
+
+@keyframes terminalTyping {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes drawLine {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
